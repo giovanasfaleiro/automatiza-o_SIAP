@@ -1,40 +1,29 @@
 {
-  "name": "SIAP_FINAL_ESTAVEL",
+  "name": "SIAP_4BIM_DATAS_AZUIS",
   "icon": "riGlobalLine",
   "version": "1.29.12",
   "drawflow": {
-    "edges": [
-      { "id": "e1", "source": "1", "sourceHandle": "1-output-1", "target": "2", "targetHandle": "2-input-1" },
-      { "id": "e2", "source": "2", "sourceHandle": "2-output-1", "target": "3", "targetHandle": "3-input-1" },
-      { "id": "e3", "source": "3", "sourceHandle": "3-output-1", "target": "4", "targetHandle": "4-input-1" },
-      { "id": "e4", "source": "4", "sourceHandle": "4-output-1", "target": "5", "targetHandle": "5-input-1" },
-      { "id": "e5", "source": "5", "sourceHandle": "5-output-1", "target": "6", "targetHandle": "6-input-1" },
-      { "id": "e6", "source": "6", "sourceHandle": "6-output-1", "target": "7", "targetHandle": "7-input-1" },
-      { "id": "e7", "source": "7", "sourceHandle": "7-output-1", "target": "8", "targetHandle": "8-input-1" },
-      { "id": "e8", "source": "8", "sourceHandle": "8-output-1", "target": "9", "targetHandle": "9-input-1" },
-      { "id": "e9", "source": "9", "sourceHandle": "9-output-1", "target": "10", "targetHandle": "10-input-1" },
-      { "id": "e10", "source": "10", "sourceHandle": "10-output-true", "target": "11", "targetHandle": "11-input-1" },
-      { "id": "e11", "source": "10", "sourceHandle": "10-output-false", "target": "12", "targetHandle": "12-input-1" },
-      { "id": "e12", "source": "11", "sourceHandle": "11-output-1", "target": "14", "targetHandle": "14-input-1" },
-      { "id": "e13", "source": "12", "sourceHandle": "12-output-1", "target": "13", "targetHandle": "13-input-1" },
-      { "id": "e14", "source": "13", "sourceHandle": "13-output-1", "target": "14", "targetHandle": "14-input-1" }
-    ],
     "nodes": [
-      { "id": "1", "type": "BlockBasic", "label": "trigger", "position": { "x": 0, "y": 300 }, "data": { "type": "manual" } },
-      { "id": "2", "type": "BlockBasic", "label": "new-tab", "position": { "x": 200, "y": 300 }, "data": { "url": "https://siap.educacao.go.gov.br/DiarioEscolarListagem.aspx", "active": true } },
-      { "id": "3", "type": "BlockBasic", "label": "delay", "position": { "x": 400, "y": 300 }, "data": { "delay": 5000, "description": "Espera login/carregamento" } },
-      { "id": "4", "type": "BlockBasic", "label": "forms", "position": { "x": 600, "y": 300 }, "data": { "type": "select", "selector": "#cphFuncionalidade_cphCampos_ddlSerie", "value": "1412", "description": "Série" } },
-      { "id": "5", "type": "BlockBasic", "label": "delay", "position": { "x": 800, "y": 300 }, "data": { "delay": 3000, "description": "Espera Disciplina" } },
-      { "id": "6", "type": "BlockBasic", "label": "event-click", "position": { "x": 1000, "y": 300 }, "data": { "selector": "#cphFuncionalidade_btnListar" } },
-      { "id": "7", "type": "BlockBasic", "label": "wait-condition", "position": { "x": 1200, "y": 300 }, "data": { "selector": ".modal-backdrop", "changeType": "element-removed", "description": "Espera o círculo girando sumir" } },
-      { "id": "8", "type": "BlockBasic", "label": "event-click", "position": { "x": 1400, "y": 300 }, "data": { "selector": "tr:nth-child(4) > td:nth-child(7)", "description": "Seleciona Turma" } },
-      { "id": "9", "type": "BlockBasic", "label": "delay", "position": { "x": 1600, "y": 300 }, "data": { "delay": 4000 } },
-      { "id": "10", "type": "BlockBasic", "label": "conditions", "position": { "x": 1800, "y": 300 }, "data": { "conditions": [ { "id": "c1", "type": "javascript", "data": { "code": "document.querySelector('#cphFuncionalidade_cphCampos_ddlSerie').selectedOptions[0].text.includes('1ª')" } } ] } },
-      { "id": "11", "type": "BlockBasic", "label": "event-click", "position": { "x": 2050, "y": 200 }, "data": { "selector": "input[value*='Revisa']", "description": "Botão Revisa Goiás" } },
-      { "id": "12", "type": "BlockBasic", "label": "event-click", "position": { "x": 2050, "y": 400 }, "data": { "selector": "input[value*='Outros']", "description": "Botão Outros" } },
-      { "id": "13", "type": "BlockBasic", "label": "forms", "position": { "x": 2250, "y": 400 }, "data": { "type": "text-field", "selector": "#cphFuncionalidade_cphCampos_TxtConteudoLivre", "value": "livro" } },
-      { "id": "14", "type": "BlockBasic", "label": "event-click", "position": { "x": 2500, "y": 300 }, "data": { "selector": "#cphFuncionalidade_btnAlterar", "description": "Botão SALVAR" } }
+      { "id": "trig", "type": "BlockBasic", "label": "trigger", "position": { "x": 0, "y": 300 }, "data": { "type": "manual" } },
+      { "id": "tab", "type": "BlockBasic", "label": "new-tab", "position": { "x": 200, "y": 300 }, "data": { "url": "https://siap.educacao.go.gov.br/DiarioEscolarListagem.aspx", "active": true } },
+      { "id": "wait1", "type": "BlockBasic", "label": "delay", "position": { "x": 400, "y": 300 }, "data": { "delay": 8000 } },
+      { "id": "bim", "type": "BlockBasic", "label": "forms", "position": { "x": 600, "y": 300 }, "data": { "type": "select", "selector": "#cphFuncionalidade_cphCampos_ddlBimestre", "value": "4" } },
+      { "id": "list", "type": "BlockBasic", "label": "event-click", "position": { "x": 800, "y": 300 }, "data": { "selector": "#cphFuncionalidade_btnListar" } },
+      { "id": "wait_load", "type": "BlockBasic", "label": "wait-condition", "position": { "x": 1000, "y": 300 }, "data": { "selector": ".modal-backdrop", "changeType": "element-removed", "timeout": 20000 } },
+      { "id": "loop", "type": "BlockBasic", "label": "loop-elements", "position": { "x": 1250, "y": 300 }, "data": { "selector": ".dialog[style*='background-color: Blue'], .dialog.azul", "description": "Busca todas as datas azuis" } },
+      { "id": "click_day", "type": "BlockBasic", "label": "event-click", "position": { "x": 1500, "y": 300 }, "data": { "selector": "$.loop.element" } },
+      { "id": "save", "type": "BlockBasic", "label": "event-click", "position": { "x": 1750, "y": 300 }, "data": { "selector": "#cphFuncionalidade_btnAlterar" } }
+    ],
+    "edges": [
+      { "id": "e1", "source": "trig", "target": "tab" },
+      { "id": "e2", "source": "tab", "target": "wait1" },
+      { "id": "e3", "source": "wait1", "target": "bim" },
+      { "id": "e4", "source": "bim", "target": "list" },
+      { "id": "e5", "source": "list", "target": "wait_load" },
+      { "id": "e6", "source": "wait_load", "target": "loop" },
+      { "id": "e7", "source": "loop", "target": "click_day" },
+      { "id": "e8", "source": "click_day", "target": "save" },
+      { "id": "e9", "source": "save", "target": "loop", "targetHandle": "loop-input-1" }
     ]
-  },
-  "settings": { "onError": "restart-workflow", "restartTimes": 3, "blockDelay": 1000 }
+  }
 }
