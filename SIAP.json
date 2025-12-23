@@ -1,67 +1,24 @@
 {
-  "name": "SIAP - Versão Corrigida",
+  "name": "SIAP_FINAL_AUTOMATIZADO",
   "icon": "riGlobalLine",
-  "table": [],
   "version": "1.29.12",
   "drawflow": {
     "edges": [
-      { "id": "e1", "source": "trigger", "sourceHandle": "trigger-output-1", "target": "delay_inicial", "targetHandle": "delay_inicial-input-1" },
-      { "id": "e2", "source": "delay_inicial", "sourceHandle": "delay_inicial-output-1", "target": "aba_siap", "targetHandle": "aba_siap-input-1" },
-      { "id": "e3", "source": "aba_siap", "sourceHandle": "aba_siap-output-1", "target": "menu_diario", "targetHandle": "menu_diario-input-1" },
-      { "id": "e4", "source": "menu_diario", "sourceHandle": "menu_diario-output-1", "target": "delay_carregamento", "targetHandle": "delay_carregamento-input-1" },
-      { "id": "e5", "source": "delay_carregamento", "sourceHandle": "delay_carregamento-output-1", "target": "select_serie", "targetHandle": "select_serie-input-1" }
+      { "id": "e1", "source": "1", "sourceHandle": "1-output-1", "target": "2", "targetHandle": "2-input-1" },
+      { "id": "e2", "source": "2", "sourceHandle": "2-output-1", "target": "3", "targetHandle": "3-input-1" },
+      { "id": "e3", "source": "3", "sourceHandle": "3-output-1", "target": "4", "targetHandle": "4-input-1" },
+      { "id": "e4", "source": "4", "sourceHandle": "4-output-1", "target": "5", "targetHandle": "5-input-1" },
+      { "id": "e5", "source": "5", "sourceHandle": "5-output-1", "target": "6", "targetHandle": "6-input-1" },
+      { "id": "e6", "source": "6", "sourceHandle": "6-output-1", "target": "7", "targetHandle": "7-input-1" }
     ],
     "nodes": [
-      {
-        "id": "trigger",
-        "type": "BlockBasic",
-        "label": "trigger",
-        "position": { "x": 50, "y": 300 },
-        "data": { "type": "manual" }
-      },
-      {
-        "id": "delay_inicial",
-        "type": "BlockBasic",
-        "label": "delay",
-        "position": { "x": 250, "y": 300 },
-        "data": { "delay": 2000, "description": "Espera inicial" }
-      },
-      {
-        "id": "aba_siap",
-        "type": "BlockBasic",
-        "label": "switch-tab",
-        "position": { "x": 450, "y": 300 },
-        "data": { "matchPattern": "https://siap.educacao.go.gov.br/*" }
-      },
-      {
-        "id": "menu_diario",
-        "type": "BlockBasic",
-        "label": "event-click",
-        "position": { "x": 650, "y": 300 },
-        "data": { "selector": ".col:nth-child(2) > li:nth-child(3) > a", "description": "Clica no Diário" }
-      },
-      {
-        "id": "delay_carregamento",
-        "type": "BlockBasic",
-        "label": "delay",
-        "position": { "x": 850, "y": 300 },
-        "data": { "delay": 4000, "description": "Espera o servidor responder" }
-      },
-      {
-        "id": "select_serie",
-        "type": "BlockBasic",
-        "label": "forms",
-        "position": { "x": 1050, "y": 300 },
-        "data": { 
-          "type": "select", 
-          "selector": "select#cphFuncionalidade_cphCampos_ddlSerie",
-          "description": "Seleciona a Série"
-        }
-      }
+      { "id": "1", "type": "BlockBasic", "label": "trigger", "position": { "x": 50, "y": 300 }, "data": { "type": "manual" } },
+      { "id": "2", "type": "BlockBasic", "label": "switch-tab", "position": { "x": 250, "y": 300 }, "data": { "matchPattern": "https://siap.educacao.go.gov.br/*" } },
+      { "id": "3", "type": "BlockBasic", "label": "event-click", "position": { "x": 450, "y": 300 }, "data": { "selector": ".col:nth-child(2) > li:nth-child(3) > a", "description": "Entra no Diário" } },
+      { "id": "4", "type": "BlockBasic", "label": "delay", "position": { "x": 650, "y": 300 }, "data": { "delay": 5000, "description": "Espera Carregar Menu" } },
+      { "id": "5", "type": "BlockBasic", "label": "forms", "position": { "x": 850, "y": 300 }, "data": { "type": "select", "selector": "select#cphFuncionalidade_cphCampos_ddlSerie", "value": "1412", "description": "Seleciona Série" } },
+      { "id": "6", "type": "BlockBasic", "label": "delay", "position": { "x": 1050, "y": 300 }, "data": { "delay": 3000, "description": "Espera Disciplina" } },
+      { "id": "7", "type": "BlockBasic", "label": "event-click", "position": { "x": 1250, "y": 300 }, "data": { "selector": "input#cphFuncionalidade_btnListar", "description": "Clica em Listar" } }
     ]
-  },
-  "settings": {
-    "onError": "stop-workflow",
-    "blockDelay": 500
   }
 }
