@@ -1,5 +1,5 @@
 {
-  "name": "SIAP_AUTOMACAO_TOTAL",
+  "name": "SIAP_FINAL_ESTAVEL",
   "icon": "riGlobalLine",
   "version": "1.29.12",
   "drawflow": {
@@ -15,22 +15,26 @@
       { "id": "e9", "source": "9", "sourceHandle": "9-output-1", "target": "10", "targetHandle": "10-input-1" },
       { "id": "e10", "source": "10", "sourceHandle": "10-output-true", "target": "11", "targetHandle": "11-input-1" },
       { "id": "e11", "source": "10", "sourceHandle": "10-output-false", "target": "12", "targetHandle": "12-input-1" },
-      { "id": "e12", "source": "12", "sourceHandle": "12-output-1", "target": "13", "targetHandle": "13-input-1" }
+      { "id": "e12", "source": "11", "sourceHandle": "11-output-1", "target": "14", "targetHandle": "14-input-1" },
+      { "id": "e13", "source": "12", "sourceHandle": "12-output-1", "target": "13", "targetHandle": "13-input-1" },
+      { "id": "e14", "source": "13", "sourceHandle": "13-output-1", "target": "14", "targetHandle": "14-input-1" }
     ],
     "nodes": [
       { "id": "1", "type": "BlockBasic", "label": "trigger", "position": { "x": 0, "y": 300 }, "data": { "type": "manual" } },
-      { "id": "2", "type": "BlockBasic", "label": "switch-tab", "position": { "x": 200, "y": 300 }, "data": { "matchPattern": "https://siap.educacao.go.gov.br/*" } },
-      { "id": "3", "type": "BlockBasic", "label": "event-click", "position": { "x": 400, "y": 300 }, "data": { "selector": ".col:nth-child(2) > li:nth-child(3) > a", "description": "Diário" } },
-      { "id": "4", "type": "BlockBasic", "label": "delay", "position": { "x": 600, "y": 300 }, "data": { "delay": 5000, "description": "Espera SIAP" } },
-      { "id": "5", "type": "BlockBasic", "label": "forms", "position": { "x": 800, "y": 300 }, "data": { "type": "select", "selector": "#cphFuncionalidade_cphCampos_ddlSerie", "description": "Série" } },
-      { "id": "6", "type": "BlockBasic", "label": "delay", "position": { "x": 1000, "y": 300 }, "data": { "delay": 3000 } },
-      { "id": "7", "type": "BlockBasic", "label": "event-click", "position": { "x": 1200, "y": 300 }, "data": { "selector": "#cphFuncionalidade_btnListar" } },
-      { "id": "8", "type": "BlockBasic", "label": "delay", "position": { "x": 1400, "y": 300 }, "data": { "delay": 4000 } },
-      { "id": "9", "type": "BlockBasic", "label": "event-click", "position": { "x": 1600, "y": 300 }, "data": { "selector": "tr:nth-child(4) > td:nth-child(6)", "description": "Seleciona Turma" } },
-      { "id": "10", "type": "BlockBasic", "label": "conditions", "position": { "x": 1800, "y": 300 }, "data": { "conditions": [ { "id": "c1", "type": "element-exists", "data": { "selector": "option[selected]:contains('1ª')" } } ], "description": "É 1ª série?" } },
-      { "id": "11", "type": "BlockBasic", "label": "event-click", "position": { "x": 2050, "y": 200 }, "data": { "selector": "#btnRevisaGoias", "description": "Revisa Goiás" } },
-      { "id": "12", "type": "BlockBasic", "label": "event-click", "position": { "x": 2050, "y": 400 }, "data": { "selector": "#btnOutros", "description": "Outros" } },
-      { "id": "13", "type": "BlockBasic", "label": "forms", "position": { "x": 2250, "y": 400 }, "data": { "type": "text-field", "selector": "#campoMaterial", "value": "livro", "description": "Digita Livro" } }
+      { "id": "2", "type": "BlockBasic", "label": "new-tab", "position": { "x": 200, "y": 300 }, "data": { "url": "https://siap.educacao.go.gov.br/DiarioEscolarListagem.aspx", "active": true } },
+      { "id": "3", "type": "BlockBasic", "label": "delay", "position": { "x": 400, "y": 300 }, "data": { "delay": 5000, "description": "Espera login/carregamento" } },
+      { "id": "4", "type": "BlockBasic", "label": "forms", "position": { "x": 600, "y": 300 }, "data": { "type": "select", "selector": "#cphFuncionalidade_cphCampos_ddlSerie", "value": "1412", "description": "Série" } },
+      { "id": "5", "type": "BlockBasic", "label": "delay", "position": { "x": 800, "y": 300 }, "data": { "delay": 3000, "description": "Espera Disciplina" } },
+      { "id": "6", "type": "BlockBasic", "label": "event-click", "position": { "x": 1000, "y": 300 }, "data": { "selector": "#cphFuncionalidade_btnListar" } },
+      { "id": "7", "type": "BlockBasic", "label": "wait-condition", "position": { "x": 1200, "y": 300 }, "data": { "selector": ".modal-backdrop", "changeType": "element-removed", "description": "Espera o círculo girando sumir" } },
+      { "id": "8", "type": "BlockBasic", "label": "event-click", "position": { "x": 1400, "y": 300 }, "data": { "selector": "tr:nth-child(4) > td:nth-child(7)", "description": "Seleciona Turma" } },
+      { "id": "9", "type": "BlockBasic", "label": "delay", "position": { "x": 1600, "y": 300 }, "data": { "delay": 4000 } },
+      { "id": "10", "type": "BlockBasic", "label": "conditions", "position": { "x": 1800, "y": 300 }, "data": { "conditions": [ { "id": "c1", "type": "javascript", "data": { "code": "document.querySelector('#cphFuncionalidade_cphCampos_ddlSerie').selectedOptions[0].text.includes('1ª')" } } ] } },
+      { "id": "11", "type": "BlockBasic", "label": "event-click", "position": { "x": 2050, "y": 200 }, "data": { "selector": "input[value*='Revisa']", "description": "Botão Revisa Goiás" } },
+      { "id": "12", "type": "BlockBasic", "label": "event-click", "position": { "x": 2050, "y": 400 }, "data": { "selector": "input[value*='Outros']", "description": "Botão Outros" } },
+      { "id": "13", "type": "BlockBasic", "label": "forms", "position": { "x": 2250, "y": 400 }, "data": { "type": "text-field", "selector": "#cphFuncionalidade_cphCampos_TxtConteudoLivre", "value": "livro" } },
+      { "id": "14", "type": "BlockBasic", "label": "event-click", "position": { "x": 2500, "y": 300 }, "data": { "selector": "#cphFuncionalidade_btnAlterar", "description": "Botão SALVAR" } }
     ]
-  }
+  },
+  "settings": { "onError": "restart-workflow", "restartTimes": 3, "blockDelay": 1000 }
 }
