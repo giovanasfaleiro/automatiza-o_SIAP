@@ -1,29 +1,38 @@
 {
-  "name": "SIAP_4BIM_DATAS_AZUIS",
+  "name": "SIAP_AUTOMACAO_COMPLETA_4BIM",
   "icon": "riGlobalLine",
   "version": "1.29.12",
   "drawflow": {
     "nodes": [
-      { "id": "trig", "type": "BlockBasic", "label": "trigger", "position": { "x": 0, "y": 300 }, "data": { "type": "manual" } },
-      { "id": "tab", "type": "BlockBasic", "label": "new-tab", "position": { "x": 200, "y": 300 }, "data": { "url": "https://siap.educacao.go.gov.br/DiarioEscolarListagem.aspx", "active": true } },
-      { "id": "wait1", "type": "BlockBasic", "label": "delay", "position": { "x": 400, "y": 300 }, "data": { "delay": 8000 } },
-      { "id": "bim", "type": "BlockBasic", "label": "forms", "position": { "x": 600, "y": 300 }, "data": { "type": "select", "selector": "#cphFuncionalidade_cphCampos_ddlBimestre", "value": "4" } },
-      { "id": "list", "type": "BlockBasic", "label": "event-click", "position": { "x": 800, "y": 300 }, "data": { "selector": "#cphFuncionalidade_btnListar" } },
-      { "id": "wait_load", "type": "BlockBasic", "label": "wait-condition", "position": { "x": 1000, "y": 300 }, "data": { "selector": ".modal-backdrop", "changeType": "element-removed", "timeout": 20000 } },
-      { "id": "loop", "type": "BlockBasic", "label": "loop-elements", "position": { "x": 1250, "y": 300 }, "data": { "selector": ".dialog[style*='background-color: Blue'], .dialog.azul", "description": "Busca todas as datas azuis" } },
-      { "id": "click_day", "type": "BlockBasic", "label": "event-click", "position": { "x": 1500, "y": 300 }, "data": { "selector": "$.loop.element" } },
-      { "id": "save", "type": "BlockBasic", "label": "event-click", "position": { "x": 1750, "y": 300 }, "data": { "selector": "#cphFuncionalidade_btnAlterar" } }
+      { "id": "start", "type": "BlockBasic", "label": "trigger", "position": { "x": 0, "y": 0 }, "data": { "type": "manual" } },
+      { "id": "tab", "type": "BlockBasic", "label": "switch-tab", "position": { "x": 200, "y": 0 }, "data": { "matchPattern": "https://siap.educacao.go.gov.br/*" } },
+      { "id": "set_bim", "type": "BlockBasic", "label": "forms", "position": { "x": 400, "y": 0 }, "data": { "type": "select", "selector": "select[id*='ddlBimestre']", "value": "4" } },
+      { "id": "click_listar", "type": "BlockBasic", "label": "event-click", "position": { "x": 600, "y": 0 }, "data": { "selector": "input[id*='btnListar']" } },
+      { "id": "wait_siap", "type": "BlockBasic", "label": "wait-condition", "position": { "x": 800, "y": 0 }, "data": { "selector": "div[id*='UpdateProgress']", "changeType": "element-removed", "timeout": 25000 } },
+      { "id": "click_turma", "type": "BlockBasic", "label": "event-click", "position": { "x": 1000, "y": 0 }, "data": { "selector": "tr:nth-child(4) > td:nth-child(7)", "description": "Clica na sua turma" } },
+      { "id": "loop_datas", "type": "BlockBasic", "label": "loop-elements", "position": { "x": 1250, "y": 0 }, "data": { "selector": "td.dialog[style*='blue'], td.dialog[style*='Blue']", "description": "Datas Azuis" } },
+      { "id": "click_dia", "type": "BlockBasic", "label": "event-click", "position": { "x": 1500, "y": 0 }, "data": { "selector": "$.loop.element" } },
+      { "id": "logic_serie", "type": "BlockBasic", "label": "conditions", "position": { "x": 1750, "y": 0 }, "data": { "conditions": [ { "id": "c1", "type": "javascript", "data": { "code": "document.body.innerText.includes('1ª Série')" } } ] } },
+      { "id": "btn_revisa", "type": "BlockBasic", "label": "event-click", "position": { "x": 2000, "y": -100 }, "data": { "selector": "input[value*='Revisa']" } },
+      { "id": "btn_outros", "type": "BlockBasic", "label": "event-click", "position": { "x": 2000, "y": 100 }, "data": { "selector": "input[value*='Outros']" } },
+      { "id": "type_livro", "type": "BlockBasic", "label": "forms", "position": { "x": 2200, "y": 100 }, "data": { "type": "text-field", "selector": "textarea[id*='TxtConteudoLivre']", "value": "livro" } },
+      { "id": "click_salvar", "type": "BlockBasic", "label": "event-click", "position": { "x": 2450, "y": 0 }, "data": { "selector": "input[id*='btnAlterar']" } }
     ],
     "edges": [
-      { "id": "e1", "source": "trig", "target": "tab" },
-      { "id": "e2", "source": "tab", "target": "wait1" },
-      { "id": "e3", "source": "wait1", "target": "bim" },
-      { "id": "e4", "source": "bim", "target": "list" },
-      { "id": "e5", "source": "list", "target": "wait_load" },
-      { "id": "e6", "source": "wait_load", "target": "loop" },
-      { "id": "e7", "source": "loop", "target": "click_day" },
-      { "id": "e8", "source": "click_day", "target": "save" },
-      { "id": "e9", "source": "save", "target": "loop", "targetHandle": "loop-input-1" }
+      { "id": "e1", "source": "start", "target": "tab" },
+      { "id": "e2", "source": "tab", "target": "set_bim" },
+      { "id": "e3", "source": "set_bim", "target": "click_listar" },
+      { "id": "e4", "source": "click_listar", "target": "wait_siap" },
+      { "id": "e5", "source": "wait_siap", "target": "click_turma" },
+      { "id": "e6", "source": "click_turma", "target": "loop_datas" },
+      { "id": "e7", "source": "loop_datas", "target": "click_dia" },
+      { "id": "e8", "source": "click_dia", "target": "logic_serie" },
+      { "id": "e9", "source": "logic_serie", "target": "btn_revisa", "targetHandle": "btn_revisa-input-1" },
+      { "id": "e10", "source": "logic_serie", "target": "btn_outros", "targetHandle": "btn_outros-input-1" },
+      { "id": "e11", "source": "btn_outros", "target": "type_livro" },
+      { "id": "e12", "source": "btn_revisa", "target": "click_salvar" },
+      { "id": "e13", "source": "type_livro", "target": "click_salvar" },
+      { "id": "e14", "source": "click_salvar", "target": "loop_datas", "targetHandle": "loop_datas-input-1" }
     ]
   }
 }
